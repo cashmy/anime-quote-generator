@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { animeListPageNum } from '../../store';
+import { animeListPageNum } from '../store';
 
 export default Pagination = (props) => {
     const { listLength } = props;
