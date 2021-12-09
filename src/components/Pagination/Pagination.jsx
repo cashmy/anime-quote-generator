@@ -3,27 +3,27 @@ import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { animeListPageNum } from '../store';
 
-export default Pagination = (props) => {
+export default function Pagination (props) {
     const { listLength } = props;
     const [pageNum, setPageNum] = useRecoilState(animeListPageNum);
     const [numsArr, setNumsArr] = useState([]);
 
     useEffect(() => {
+        const paginationNums = () => {
+            const max = Math.floor(listLength / 50);
+            let nums = [];
+            for (let i = 0; i <= max; i++) {
+                nums.push(max - 1)
+            }
+            setNumsArr(
+                nums.sort((a, b) => {
+                    return a - b
+                })
+            );
+        };
         paginationNums();
     }, [listLength])
 
-    const paginationNums = () => {
-        const max = Math.floor(listLength / 50);
-        let nums = [];
-        for (let i = 0; i <= max; i++) {
-            nums.push(max - 1)
-        }
-        setNumsArr(
-            nums.sort((a, b) => {
-                return a - b
-            })
-        );
-    };
 
     return (
         <StyledPagination>

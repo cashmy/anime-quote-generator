@@ -5,48 +5,48 @@ import Pagination from "../../Pagination/Pagination";
 import Quote from "../../Quote/Quote";
 import { slicedAnimeTitles, animeTitles } from "../../store";
 
-export default Homepage = () => {
-    const animes = useRecoilValue(animeTitles);
-    const slicedAnimes = useRecoilValue(slicedAnimeTitles);
-    const colors = ["#FAE1DA", "#E8C6AD", "#F2E2ED", "#D6EBE4", "#BFDCD0"];
+export default function Homepage() {
+  const animes = useRecoilValue(animeTitles);
+  const slicedAnimes = useRecoilValue(slicedAnimeTitles);
+  const colors = ["#FAE1DA", "#E8C6AD", "#F2E2ED", "#D6EBE4", "#BFDCD0"];
 
-    const generateColor = () => {
-        const randNum = Math.floor(Math.random() * 5)
-        return colors[randNum];
-    };
+  const generateColor = () => {
+    const randNum = Math.floor(Math.random() * 5)
+    return colors[randNum];
+  };
 
-    return (
-        <StyledHomePage>
-            <header>
-                <h2>Anime Quote Generator</h2>
-            </header>
-            <main>
-                <Quote />
-                <div className="animes">
-                    <h3>All Animes</h3>
-                    {animes?.length ? (
-                        <p>Click on any anime to see a quote from it</p>
-                    ) : null}
-                    <div className="flex" >
-                        {animes?.length ? (
-                            slicedAnimes?.map((anime) => {
-                                <div key={anime} style={{ margin: "0 1.3rem 1.3rem 0" }}>
-                                    <AnimePill anime={anime} color={generateColor()} />
-                                </div>
-                            })
-                        ) : (
-                            <p className="nodata">No anime found </p>
-                        )}
-                    </div>
-                    {animes?.length > 50 ? (
-                        <div className="pagination">
-                            <Pagination listLength={animes?.length} />
-                        </div>
-                    ) : null}
+  return (
+    <StyledHomePage>
+      <header>
+        <h2>Anime Quote Generator</h2>
+      </header>
+      <main>
+        <Quote />
+        <div className="animes">
+          <h3>All Animes</h3>
+          {animes?.length ? (
+            <p>Click on any anime to see a quote from it</p>
+          ) : null}
+          <div className="flex">
+            {animes?.length ? (
+              slicedAnimes?.map((anime) => (
+                <div key={anime} style={{ margin: "0 1.3rem 1.3rem 0" }}>
+                  <AnimePill anime={anime} color={generateColor()} />
                 </div>
-            </main>
-        </StyledHomePage>
-    );
+              ))
+            ) : (
+              <p className="nodata">No anime found 😞 </p>
+            )}
+          </div>
+          {animes?.length > 50 ? (
+            <div className="pagination">
+              <Pagination listLength={animes?.length} />
+            </div>
+          ) : null}
+        </div>
+      </main>
+    </StyledHomePage>
+  );
 };
 
 const StyledHomePage = styled.div`

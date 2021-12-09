@@ -4,26 +4,26 @@ import axios from 'axios';
 import styled from 'styled-components';
 import SmallQuote from '../../SmallQuote/SmallQuote';
 
-export default Anime = () => {
+export default function Anime () {
     const param = useParams();
     const [quotes, setQuotes] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (param?.name) {
+            const fetchAnimeQuotes = async () => {
+                try {
+                    const res = await axios.get(`https://animechan.vercel.app/api/quotes/anime?title=${param?.name}`);
+                    setQuotes(res?.data);
+                    setLoading(false);
+                } catch (err) {
+                    console.log("Anime API error: ", err)
+                }
+            }
             fetchAnimeQuotes();
         }
     }, [param])
 
-    const fetchAnimeQuotes = async () => {
-        try {
-            const res = await axios.get(`https://animechan.vercel.app/api/quotes/anime?title=${param?.name}`);
-            setQuotes(res?.data);
-            setLoading(false);
-        } catch (err) {
-            console.log("Anime API error: ", err)
-        }
-    }
 
     return (
         <StyledAnimePage>

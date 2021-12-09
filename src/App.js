@@ -7,21 +7,21 @@ import Homepage from './components/pages/home';
 import Animepage from './components/pages/anime';
 
 
-export default App = () => {
+const App = () => {
   const setTitles = useSetRecoilState(animeTitles);
 
-  const fetchAnimes = async () => {
-    try {
-      const res = await axios.get('https://animechan.vecel.app/api/available/anime');
-      setTitles(res?.data);
-    } catch (err) {
-      console.log("API fetch err for animes: ", err);
-    }
-  }
 
   useEffect(() => {
+    const fetchAnimes = async () => {
+      try {
+        const res = await axios.get('https://animechan.vercel.app/api/available/anime');
+        setTitles(res?.data);
+      } catch (err) {
+        console.log("API fetch err for animes: ", err);
+      }
+    }
     fetchAnimes();
-  }, [])
+  })
 
   return (
     <BrowserRouter>
@@ -32,3 +32,5 @@ export default App = () => {
     </BrowserRouter>
   )
 }
+
+export default App;
