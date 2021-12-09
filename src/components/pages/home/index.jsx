@@ -5,7 +5,7 @@ import Pagination from "../../Pagination/Pagination";
 import Quote from "../../Quote/Quote";
 import { slicedAnimeTitles, animeTitles } from "../../store";
 
-export default function Homepage() {
+const Homepage = () => {
   const animes = useRecoilValue(animeTitles);
   const slicedAnimes = useRecoilValue(slicedAnimeTitles);
   const colors = ["#FAE1DA", "#E8C6AD", "#F2E2ED", "#D6EBE4", "#BFDCD0"];
@@ -89,3 +89,5 @@ const StyledHomePage = styled.div`
     }
   }
 `;
+
+export default Homepage;

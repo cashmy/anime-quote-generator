@@ -26,8 +26,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={Homepage} />
-        <Route exact path="/anime/:name" element={Animepage} />
+        <Route exact path="/" element={<Homepage />} />
+        <Route exact path="/anime/:name" element={<Animepage />} />
       </Routes>
     </BrowserRouter>
   )

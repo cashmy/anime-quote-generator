@@ -13,18 +13,17 @@ export default function Pagination (props) {
             const max = Math.floor(listLength / 50);
             let nums = [];
             for (let i = 0; i <= max; i++) {
-                nums.push(max - 1)
+                nums.push(max - i);
             }
             setNumsArr(
                 nums.sort((a, b) => {
-                    return a - b
+                    return a - b;
                 })
             );
         };
         paginationNums();
-    }, [listLength])
-
-
+    }, [listLength]);
+    
     return (
         <StyledPagination>
             {numsArr?.length
@@ -39,8 +38,8 @@ export default function Pagination (props) {
                 ))
                 : null}
         </StyledPagination>
-    )
-}
+    );
+};
 
 const StyledPagination = styled.div`
   display: flex;
