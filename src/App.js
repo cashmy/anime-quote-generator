@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { useSetRecoilState } from 'recoil';
+import axios from 'axios';
+import { animeTitles } from './components/store';
+import Homepage from './components/pages/home';
+import Animepage from './components/pages/anime';
 
-function App() {
+
+export default App = () => {
+  const setTitles = useSetRecoilState(animeTitles);
+
+  const fetchAnimes = async () => {
+    try {
+      const res = await axios.get('https://animechan.vecel.app/api/available/anime');
+      setTitles(res?.data);
+    } catch (err) {
+      console.log("API fetch err for animes: ", err);
+    }
+  }
+
+  useEffect(() => {
+    fetchAnimes();
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={Homepage} />
+        <Route exact path="/anime/:name" element={Animepage} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
-
-export default App;
